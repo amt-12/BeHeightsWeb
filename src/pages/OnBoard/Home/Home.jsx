@@ -1,12 +1,16 @@
 import { Button, Form, Input, message } from "antd";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
+
 
 const Home = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [isLogin, setIsLogin] = useState(true);
+  const navigate = useNavigate(); // Define the navigate function
+
   useEffect(() => {
     const container = document.getElementById("container");
     const registerBtn = document.getElementById("register");
@@ -32,8 +36,7 @@ const Home = () => {
       })
       .then((response) => {
         message.success("Login successful!");
-        console.log(response);
-        navigate('/home');
+        navigate('/Dashboard')
       })
       .catch((error) => {
         message.error("Login failed!");
@@ -93,17 +96,16 @@ const Home = () => {
             >
               <Input type="email" placeholder="Email" />
             </Form.Item>
-            <Form.Item name="password" rules={[
-                  {
-                    required: true,
-                    message: "Please enter your Password!",
-                  },
-                ]}>
-              <Input
-                type="password"
-                placeholder="Password"
-                
-              />
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter your Password!",
+                },
+              ]}
+            >
+              <Input type="password" placeholder="Password" />
             </Form.Item>
             <Form.Item
               name="phone"
@@ -126,21 +128,29 @@ const Home = () => {
         <div class="form-container sign-in">
           <Form onFinish={onFinish}>
             <h1>Log In</h1>
-            <span className="text-[15px] font-bold">or use your email password</span>
-            <Form.Item name="email" rules={[
-                  {
-                    required: true,
-                    message: "Please enter your Email!",
-                  },
-                ]}>
+            <span className="text-[15px] font-bold">
+              or use your email password
+            </span>
+            <Form.Item
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter your Email!",
+                },
+              ]}
+            >
               <Input type="email" placeholder="Email" />
             </Form.Item>
-            <Form.Item name="password" rules={[
-                  {
-                    required: true,
-                    message: "Please enter your Password!",
-                  },
-                ]}>
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter your Password!",
+                },
+              ]}
+            >
               <Input type="password" placeholder="Password" />
             </Form.Item>
             <p className="text-[15px] font-bold">Forget Your Password?</p>

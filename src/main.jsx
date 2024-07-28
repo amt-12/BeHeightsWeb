@@ -7,11 +7,17 @@ import {
 } from "react-router-dom";
 import ErrorPage from './error-page';
 import Home from './pages/OnBoard/Home/Home.jsx'
+import Dashboard from './pages/Dashboard/Dashboard.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element:<Home/>,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/Dashboard",
+    element:<Dashboard/>,
     errorElement: <ErrorPage />,
   },
 
