@@ -68,7 +68,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="bg-[#f8f1e1] flex items-center justify-center flex-col h-[90vh]">
       <div class="container" id="container">
         <div class="form-container sign-up">
           <Form onFinish={onFinish2}>
@@ -127,7 +127,7 @@ const Home = () => {
         </div>
         <div class="form-container sign-in">
           <Form onFinish={onFinish}>
-            <h1>Log In</h1>
+            <p className="text-[25px]">Log In</p>
             <span className="text-[15px] font-bold">
               or use your email password
             </span>
@@ -153,7 +153,7 @@ const Home = () => {
             >
               <Input type="password" placeholder="Password" />
             </Form.Item>
-            <p className="text-[15px] font-bold">Forget Your Password?</p>
+            <p className="text-[250px] font-bold">Forget Your Password?</p>
             <Button type="primary" htmlType="submit">
               Log In
             </Button>
