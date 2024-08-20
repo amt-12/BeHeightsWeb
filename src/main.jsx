@@ -8,6 +8,7 @@ import {
 import ErrorPage from './error-page';
 import Home from './pages/OnBoard/Home/Home.jsx'
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
+import Category from './pages/Category/Category.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,11 @@ const router = createBrowserRouter([
   {
     path: "/Dashboard",
     element:<Dashboard/>,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/category",
+    element:<Category/>,
     errorElement: <ErrorPage />,
   },
 

@@ -1,5 +1,6 @@
 import { Button, Image } from "antd";
-import React, { useState, useEffect } from "react";
+import React, { useRef,useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import logo from "../../assets/logo.png";
 import {
   BellFilled,
@@ -9,8 +10,23 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import { Input, Modal } from "antd";
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+import { Mousewheel, Pagination } from 'swiper/modules';
+
+import { Link } from "react-router-dom";
 import example from "../../assets/greenBack.jpg";
 import axios from "axios";
+import dinner from "../../assets/dinner.png";
+import deal from "../../assets/deal.png";
+import spa from "../../assets/spa.png";
+import salon from "../../assets/salon.png";
+import game from "../../assets/dinner.png";
+import gift from "../../assets/gift.png";
+import online from "../../assets/online.png";
+import newdeal from "../../assets/newdeal.png";
+
 const { Search } = Input;
 const Dashboard = () => {
   const [active, setActive] = useState(3);
@@ -126,6 +142,17 @@ const Dashboard = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  const items = [
+    { image: dinner, title: "Buffets", offers: "Exclusive Buffet Offers", off: "50% OFF" },
+    { image: deal, title: "Restaurant Deals", offers: "Special Restaurant Discounts", off: "50% OFF" },
+    { image: spa, title: "Spa Deals", offers: "Relaxation Offers & Packages", off: "50% OFF" },
+    { image: salon, title: "Salon Deals", offers: "Salon Service Discounts", off: "50% OFF" },
+    { image: game, title: "Games & Outing", offers: "Entertainment Offers & Deals", off: "50% OFF" },
+    { image: gift, title: "Gifts Cards", offers: "Gift Card Discounts", off: "50% OFF" },
+    { image: online, title: "Online Shopping", offers: "Online Shopping Offers", off: "50% OFF" },
+    { image: newdeal, title: "New Deals", offers: "Latest Deals & Offers", off: "50% OFF" }
+];
+
   return (
     <div className="m-4">
       <div className="border h-[830px] bg-[#f25827] rounded-[50px] border-solid p-8 flex flex-col justify-between">
@@ -152,33 +179,66 @@ const Dashboard = () => {
             </p>
           </div>
         </div>
-        <div className="p-[50px] px-[80px]">
-          <div className="flex flex-col justify-center items-center ">
-            <p className="text-[100px]">Grand Opening</p>
-            <p className="text-[60px]">Stay Tuned</p>
-          </div>
-          <div className="h-80 rounded-[60px] border p-8 bg-[#f8f1e1]">
+        <div className=" ">
+        <Swiper
+        direction={'vertical'}
+        slidesPerView={1}
+        spaceBetween={30}
+        mousewheel={true}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Mousewheel, Pagination]}
+        className="mySwiper m-4"
+      >
+        <SwiperSlide>Slide 1</SwiperSlide>
+        <SwiperSlide>Slide 2</SwiperSlide>
+        <SwiperSlide>Slide 3</SwiperSlide>
+        <SwiperSlide>Slide 4</SwiperSlide>
+        <SwiperSlide>Slide 5</SwiperSlide>
+        <SwiperSlide>Slide 6</SwiperSlide>
+        <SwiperSlide>Slide 7</SwiperSlide>
+        <SwiperSlide>Slide 8</SwiperSlide>
+        <SwiperSlide>Slide 9</SwiperSlide>
+      </Swiper>
+          <div className="h-60 rounded-[60px] border p-8 bg-[#f8f1e1]">
             <div className="px-8">
               <Input
                 className="h-[50px] rounded-[20px]"
                 prefix={<SearchOutlined />}
               />
             </div>
-            <div className="flex justify-center items-center gap-8 p-8">
-              <Button className="border h-[130px] p-[1rem] flex justify-end gap-4 items-center bg-[#f4e5c2] rounded-[20px] text-[20px] font-[500]">
+            <div className="flex justify-center items-center gap-8 p-6">
+              <Button className="border h-[100px] p-[1rem] flex justify-end gap-4 items-center bg-[#f4e5c2] rounded-[20px] text-[20px] font-[500]">
                 Popular Items{" "}
                 <RightCircleFilled className="text-[#f25827] text-[20px]" />
               </Button>
-              <Button className="border h-[130px] p-[1rem] flex justify-end gap-4 items-center bg-[#f4e5c2] rounded-[20px] text-[20px] font-[500]">
+              <Button className="border h-[100px] p-[1rem] flex justify-end gap-4 items-center bg-[#f4e5c2] rounded-[20px] text-[20px] font-[500]">
                 Special Offers for you{" "}
                 <RightCircleFilled className="text-[#f25827] text-[20px]" s />
               </Button>
-              <Button className="border h-[130px] p-[1rem] flex flex-col justify-center gap-4 items-center text-[white] bg-[black] rounded-[20px] text-[20px] font-[500]">
+              <Button className="border h-[120px] p-[1rem] flex flex-col justify-center gap-4 items-center text-[white] bg-[black] rounded-[20px] text-[20px] font-[500]">
                 Show All{" "}
                 <RightCircleFilled className="text-[#f25827] text-[20px]" />
               </Button>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="flex-col justify-center items-center  rounded-[30px] m-[20px] my-[4rem]">
+        <div className="flex justify-center items-center">
+          <p className="font-bold text-[35px]">Business Categories</p>
+        </div>
+        <div className="grid grid-cols-6 gap-4 m-[4rem] ">
+          {items.map((item, index) => (
+              <Link to={`/category`} state={{ item }}>
+            <div className="border flex justify-center items-center flex-col bg-white rounded-[20px] w-[200px] p-4 shadow-xl hover:shadow-2xl">
+              <img src={item.image} width={60} height={60} />
+              <p className="text-[20px] font-semibold my-2 mt-4">{item.title}</p>
+            </div>
+            </Link>
+
+          ))}
         </div>
       </div>
       <div className="flex-col justify-center items-center  rounded-[30px] m-[40px] my-[4rem]">
@@ -207,7 +267,6 @@ const Dashboard = () => {
                     open={isModalOpen}
                     onOk={handleOk}
                     onCancel={handleCancel}
-                  
                   >
                     <p>Some contents...</p>
                     <p>Some contents...</p>
