@@ -9,21 +9,32 @@ import ErrorPage from './error-page';
 import Home from './pages/OnBoard/Home/Home.jsx'
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import Category from './pages/Category/Category.jsx';
+import LandingPage1 from './pages/LandingPage/LandingPage1.jsx';
+import LandingPage2 from './pages/LandingPage/LandingPage2.jsx';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/home",
     element:<Home/>,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/Dashboard",
+    path: "/",
     element:<Dashboard/>,
     errorElement: <ErrorPage />,
   },
   {
     path: "/category",
     element:<Category/>,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/landingPage1",
+    element:<LandingPage1/>,
+    errorElement: <ErrorPage />,
+  }, {
+    path: "/landingPage2",
+    element:<LandingPage2/>,
     errorElement: <ErrorPage />,
   },
 

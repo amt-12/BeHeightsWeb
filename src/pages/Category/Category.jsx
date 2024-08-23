@@ -1,7 +1,7 @@
-import React from "react";
+import React,{useState} from "react";
 import { useLocation } from "react-router-dom";
 import example from "../../assets/greenBack.jpg";
-import { Button } from "antd";
+import { Button, Image, Modal } from "antd";
 import dinner from "../../assets/dinner.png";
 import deal from "../../assets/deal.png";
 import spa from "../../assets/spa.png";
@@ -12,10 +12,15 @@ import online from "../../assets/online.png";
 import newdeal from "../../assets/newdeal.png";
 import { Link } from "react-router-dom";
 import animation from "../../assets/rest.json";
+import animation2 from "../../assets/mobile.json";
 import Lottie from "lottie-react";
+import logo from "../../assets/logo.png";
+
 const Category = () => {
   const location = useLocation();
   const item = location.state.item;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const items = [
     {
       image: dinner,
@@ -66,7 +71,15 @@ const Category = () => {
       off: "50% OFF",
     },
   ];
-
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       <div className="flex justify-center items-center border shadow-xl hover:shadow-2xl m-4 p-2 bg-[#f25827] rounded-md">
@@ -81,7 +94,7 @@ const Category = () => {
               <p className="text-[15px] font-semibold my-2 mt-8">
                 {item.offers}
               </p>
-              <Button className="mt-4">Avail Now</Button>
+              <Button className="mt-4" onClick={showModal}>Avail Now</Button>
             </div>
 
             <div className=" w-[160px]">
@@ -113,6 +126,17 @@ const Category = () => {
             </Link>
           ))}
         </div>
+        <Modal  open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer>
+          <div className="flex justify-center items-center flex-col gap-4"> 
+          <p className="text-center font-bold text-[20px]">Download Mobile App</p>
+        <img src={logo} width={150} height={60} />
+
+          </div>
+        
+        <Lottie animationData={animation2} loop={true} />
+        <p className="text-center font-bold text-[20px]">To Get Your Coupon</p>
+
+      </Modal>
       </div>
     </>
   );

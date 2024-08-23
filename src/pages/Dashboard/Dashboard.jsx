@@ -92,7 +92,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://192.168.1.3:5000/api/product");
+        const response = await axios.get("http://172.20.10.5:5000/api/product");
         setCouponData(response?.data);
       } catch (error) {
         console.error(error);
@@ -160,18 +160,23 @@ const Dashboard = () => {
           <Image src={logo} width={150} height={60} />
           <div className="flex items-center gap-12 justify-center">
             <div className="flex items-center justify-center gap-2">
+              <Link to={`/LandingPage1`}>
               <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
-                HOME
+                LandingPage1
               </Button>
+              </Link>
+              
+              <Link to={`/LandingPage2`}>
               <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
-                PRODUCTS
+                LandingPage2
               </Button>
-              <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
+              </Link>
+              {/* <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
                 ABOUT
               </Button>
               <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
                 SUPPORT
-              </Button>
+              </Button> */}
             </div>
 
             <p className="text-white">
