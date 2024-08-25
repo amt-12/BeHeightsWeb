@@ -85,10 +85,10 @@ const Category = () => {
       <div className="flex justify-center items-center border shadow-xl hover:shadow-2xl m-4 p-2 bg-[#f25827] rounded-md">
         <p className="font-[500] text-[20px]">{item.title} Sub-Categories</p>
       </div>
-      <div className="grid grid-cols-3 gap-4 m-[4rem] ">
+      <div className="grid grid-cols-3 gap-4 m-[4rem] xs:grid-cols-1 lg:grid-cols-2 md:grid-cols-2 xl:grid-cols-3">
         {items.map((item, index) => (
-          <div className=" flex  flex-col justify-center items-center gap-4 bg-white rounded-[20px] w-[400px] p-3 shadow-xl hover:shadow-2xl">
-            <div className="flex justify-center items-center">
+          <div key={index} style={{width:'100%'}} className=" flex  flex-col justify-center items-center gap-4 bg-white rounded-[20px]  p-3 shadow-xl hover:shadow-2xl">
+            <div className="flex justify-between">
             <div className="">
               <p className="text-[15px] font-semibold my-2 mt-4">{item.off}</p>
               <p className="text-[15px] font-semibold my-2 mt-8">
@@ -114,7 +114,7 @@ const Category = () => {
         <div className="flex justify-center items-center">
           <p className="font-bold text-[35px]">Business Categories</p>
         </div>
-        <div className="grid grid-cols-6 gap-4 m-[4rem] ">
+        <div className="grid grid-cols-6 gap-4 m-[4rem] xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 ">
           {items.map((item, index) => (
             <Link to={`/category`} state={{ item }}>
               <div className="border flex justify-center items-center flex-col bg-white rounded-[20px] w-[200px] p-4 shadow-xl hover:shadow-2xl">

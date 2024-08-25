@@ -1,6 +1,6 @@
 import { Button, Image } from "antd";
-import React, { useRef,useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import React, { useRef, useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import logo from "../../assets/logo.png";
 import {
   BellFilled,
@@ -8,12 +8,13 @@ import {
   DoubleRightOutlined,
   RightCircleFilled,
   SearchOutlined,
+  DownOutlined
 } from "@ant-design/icons";
-import { Input, Modal } from "antd";
-import 'swiper/css';
-import 'swiper/css/pagination';
+import { Input, Modal,Dropdown, message, Space } from "antd";
+import "swiper/css";
+import "swiper/css/pagination";
 
-import { Mousewheel, Pagination } from 'swiper/modules';
+import { Mousewheel, Pagination } from "swiper/modules";
 
 import { Link } from "react-router-dom";
 import example from "../../assets/greenBack.jpg";
@@ -142,34 +143,69 @@ const Dashboard = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+    const itemss = [
+      { image: dinner, title: "Buffets", offers: "Exclusive Buffet Offers", off: "50% OFF" },
+      { image: deal, title: "Restaurant Deals", offers: "Special Restaurant Discounts", off: "50% OFF" },
+      { image: spa, title: "Spa Deals", offers: "Relaxation Offers & Packages", off: "50% OFF" },
+      { image: salon, title: "Salon Deals", offers: "Salon Service Discounts", off: "50% OFF" },
+      { image: game, title: "Games & Outing", offers: "Entertainment Offers & Deals", off: "50% OFF" },
+      { image: gift, title: "Gifts Cards", offers: "Gift Card Discounts", off: "50% OFF" },
+      { image: online, title: "Online Shopping", offers: "Online Shopping Offers", off: "50% OFF" },
+      { image: newdeal, title: "New Deals", offers: "Latest Deals & Offers", off: "50% OFF" }
+  ];
+  const onClick = ({ key }) => {
+    message.info(`Click on item ${key}`);
+  };
   const items = [
-    { image: dinner, title: "Buffets", offers: "Exclusive Buffet Offers", off: "50% OFF" },
-    { image: deal, title: "Restaurant Deals", offers: "Special Restaurant Discounts", off: "50% OFF" },
-    { image: spa, title: "Spa Deals", offers: "Relaxation Offers & Packages", off: "50% OFF" },
-    { image: salon, title: "Salon Deals", offers: "Salon Service Discounts", off: "50% OFF" },
-    { image: game, title: "Games & Outing", offers: "Entertainment Offers & Deals", off: "50% OFF" },
-    { image: gift, title: "Gifts Cards", offers: "Gift Card Discounts", off: "50% OFF" },
-    { image: online, title: "Online Shopping", offers: "Online Shopping Offers", off: "50% OFF" },
-    { image: newdeal, title: "New Deals", offers: "Latest Deals & Offers", off: "50% OFF" }
-];
-
+    {
+      label: "Home",
+      key: "1",
+    },
+    {
+      label: "Landing Page 1",
+      key: "2",
+    },
+    {
+      label: "Landing Page 2",
+      key: "3",
+    },
+  
+  ];
   return (
     <div className="m-4">
-      <div className="border h-[830px] bg-[#f25827] rounded-[50px] border-solid p-8 flex flex-col justify-between">
+      <div
+        className="border h-[830px] bg-[#f25827] rounded-[50px] border-solid p-8 flex flex-col justify-between"
+        style={{ height: "100%" }}
+      >
         <div className="flex justify-between items-center  border bg-[#f8f1e1] rounded-[70px] px-[25px] py-2 ">
           <Image src={logo} width={150} height={60} />
           <div className="flex items-center gap-12 justify-center">
-            <div className="flex items-center justify-center gap-2">
+            <div className="xs:visible md:hidden">
+              <Dropdown
+                menu={{
+                  items,
+                  onClick,
+                }}
+              >
+                <a onClick={(e) => e.preventDefault()}>
+                  <Space>
+  
+                    <DownOutlined />
+                  </Space>
+                </a>
+              </Dropdown>
+            </div>
+            <div className="flex items-center justify-center gap-2 xs:hidden">
               <Link to={`/LandingPage1`}>
-              <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
-                LandingPage1
-              </Button>
+                <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
+                  LandingPage1
+                </Button>
               </Link>
-              
+
               <Link to={`/LandingPage2`}>
-              <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
-                LandingPage2
-              </Button>
+                <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
+                  LandingPage2
+                </Button>
               </Link>
               {/* <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
                 ABOUT
@@ -185,45 +221,49 @@ const Dashboard = () => {
           </div>
         </div>
         <div className=" ">
-        <Swiper
-        direction={'vertical'}
-        slidesPerView={1}
-        spaceBetween={30}
-        mousewheel={true}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Mousewheel, Pagination]}
-        className="mySwiper m-4"
-      >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
-      </Swiper>
-          <div className="h-60 rounded-[60px] border p-8 bg-[#f8f1e1]">
+          <Swiper
+            direction={"vertical"}
+            slidesPerView={1}
+            spaceBetween={30}
+            mousewheel={true}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[Mousewheel, Pagination]}
+            className="mySwiper m-4"
+            style={{ width: "100%" }}
+          >
+            <SwiperSlide>Slide 1</SwiperSlide>
+            <SwiperSlide>Slide 2</SwiperSlide>
+            <SwiperSlide>Slide 3</SwiperSlide>
+            <SwiperSlide>Slide 4</SwiperSlide>
+            <SwiperSlide>Slide 5</SwiperSlide>
+            <SwiperSlide>Slide 6</SwiperSlide>
+            <SwiperSlide>Slide 7</SwiperSlide>
+            <SwiperSlide>Slide 8</SwiperSlide>
+            <SwiperSlide>Slide 9</SwiperSlide>
+          </Swiper>
+          <div
+            className="rounded-[60px] border p-8 bg-[#f8f1e1]"
+            style={{ width: "100%", height: "100%" }}
+          >
             <div className="px-8">
               <Input
                 className="h-[50px] rounded-[20px]"
                 prefix={<SearchOutlined />}
               />
             </div>
-            <div className="flex justify-center items-center gap-8 p-6">
-              <Button className="border h-[100px] p-[1rem] flex justify-end gap-4 items-center bg-[#f4e5c2] rounded-[20px] text-[20px] font-[500]">
-                Popular Items{" "}
+            <div className="grid grid-cols-3 sm:grid-cols-1 xs:grid-cols-1 md:grid-cols-3 justify-center items-center gap-8 p-6">
+              <Button className="border h-[100px] p-[1rem] flex justify-center gap-4  text-center items-center bg-[#f4e5c2] rounded-[20px] text-[20px] font-[500]">
+                Popular Items
                 <RightCircleFilled className="text-[#f25827] text-[20px]" />
               </Button>
-              <Button className="border h-[100px] p-[1rem] flex justify-end gap-4 items-center bg-[#f4e5c2] rounded-[20px] text-[20px] font-[500]">
-                Special Offers for you{" "}
-                <RightCircleFilled className="text-[#f25827] text-[20px]" s />
+              <Button className="border h-[100px] p-[1rem] flex justify-center gap-4 text-center items-center bg-[#f4e5c2] rounded-[20px] text-[20px] font-[500]">
+                Special Offers for you
+                <RightCircleFilled className="text-[#f25827] text-[20px]" />
               </Button>
-              <Button className="border h-[120px] p-[1rem] flex flex-col justify-center gap-4 items-center text-[white] bg-[black] rounded-[20px] text-[20px] font-[500]">
-                Show All{" "}
+              <Button className="border h-[120px] p-[1rem] flex flex-col justify-center gap-4 text-center items-center text-[white] bg-[black] rounded-[20px] text-[20px] font-[500]">
+                Show All
                 <RightCircleFilled className="text-[#f25827] text-[20px]" />
               </Button>
             </div>
@@ -234,15 +274,16 @@ const Dashboard = () => {
         <div className="flex justify-center items-center">
           <p className="font-bold text-[35px]">Business Categories</p>
         </div>
-        <div className="grid grid-cols-6 gap-4 m-[4rem] ">
-          {items.map((item, index) => (
-              <Link to={`/category`} state={{ item }}>
-            <div className="border flex justify-center items-center flex-col bg-white rounded-[20px] w-[200px] p-4 shadow-xl hover:shadow-2xl">
-              <img src={item.image} width={60} height={60} />
-              <p className="text-[20px] font-semibold my-2 mt-4">{item.title}</p>
-            </div>
+        <div className="grid grid-cols-6 gap-4 m-[4rem] xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 ">
+          {itemss.map((item, index) => (
+            <Link to={`/category`} state={{ item }}>
+              <div className="border flex justify-center items-center flex-col bg-white rounded-[20px] w-[200px] p-4 shadow-xl hover:shadow-2xl">
+                <img src={item.image} width={60} height={60} />
+                <p className="text-[20px] font-semibold my-2 mt-4">
+                  {item.title}
+                </p>
+              </div>
             </Link>
-
           ))}
         </div>
       </div>
@@ -291,11 +332,11 @@ const Dashboard = () => {
           </Button>
         </div>
       </div>
-      <div className="flex-col justify-center items-center  rounded-[30px] m-[20px] my-[4rem]">
+      <div className="flex-col justify-center items-center   rounded-[30px] m-[20px] my-[4rem]">
         <div className="flex justify-center items-center">
           <p className="font-bold text-[35px]">Recommended</p>
         </div>
-        <div className="grid grid-cols-3 gap-4 mt-[2rem] px-10 ">
+        <div className="grid grid-cols-3 xs:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-[2rem] px-10 ">
           {restaurants.map((restaurant, index) => (
             <div class="" key={index}>
               <div className="bg-[white] p-[1rem] rounded-[20px]">
