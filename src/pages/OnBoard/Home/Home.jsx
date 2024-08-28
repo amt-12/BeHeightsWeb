@@ -29,7 +29,7 @@ const Home = () => {
 
   const onFinish = (values) => {
     axios
-      .post("http://192.168.1.3:5000/api/auth/login", {
+      .post("http://192.168.1.3:5000/api/auth/login", { 
         name: values.name,
         email: values.email,
         password: values.password,
