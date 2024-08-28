@@ -13,9 +13,8 @@ import {
 import { Input, Modal,Dropdown, message, Space } from "antd";
 import "swiper/css";
 import "swiper/css/pagination";
-
 import { Mousewheel, Pagination } from "swiper/modules";
-
+import animation2 from "../../assets/mobile.json";
 import { Link } from "react-router-dom";
 import example from "../../assets/greenBack.jpg";
 import axios from "axios";
@@ -27,6 +26,7 @@ import game from "../../assets/dinner.png";
 import gift from "../../assets/gift.png";
 import online from "../../assets/online.png";
 import newdeal from "../../assets/newdeal.png";
+import Lottie from "lottie-react";
 
 const { Search } = Input;
 const Dashboard = () => {
@@ -93,7 +93,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://172.20.10.5:5000/api/product");
+        const response = await axios.get("http://192.168.1.3:5000/api/product");
         setCouponData(response?.data);
       } catch (error) {
         console.error(error);
@@ -308,16 +308,17 @@ const Dashboard = () => {
                   >
                     Avail Now
                   </Button>
-                  <Modal
-                    title="Basic Modal"
-                    open={isModalOpen}
-                    onOk={handleOk}
-                    onCancel={handleCancel}
-                  >
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
-                  </Modal>
+                  <Modal  open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer>
+          <div className="flex justify-center items-center flex-col gap-4"> 
+          <p className="text-center font-bold text-[20px]">Download Mobile App</p>
+        <img src={logo} width={150} height={60} />
+
+          </div>
+        
+        <Lottie animationData={animation2} loop={true} />
+        <p className="text-center font-bold text-[20px]">To Get Your Coupon</p>
+
+      </Modal>
                 </div>
               </div>
             </div>
