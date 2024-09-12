@@ -1,5 +1,5 @@
 import { Button, Image } from "antd";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState ,Platform} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import logo from "../../assets/logo.png";
 import {
@@ -8,16 +8,16 @@ import {
   DoubleRightOutlined,
   RightCircleFilled,
   SearchOutlined,
-  DownOutlined
+  DownOutlined,
 } from "@ant-design/icons";
-import { Input, Modal,Dropdown, message, Space } from "antd";
+import { Input, Modal, Dropdown, message, Space } from "antd";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Mousewheel, Pagination } from "swiper/modules";
 import animation2 from "../../assets/mobile.json";
 import { Link } from "react-router-dom";
 import example from "../../assets/greenBack.jpg";
-import axios from "axios";
+import axiosInstance from "../../../axiosInstance";
 import dinner from "../../assets/dinner.png";
 import deal from "../../assets/deal.png";
 import spa from "../../assets/spa.png";
@@ -27,12 +27,18 @@ import gift from "../../assets/gift.png";
 import online from "../../assets/online.png";
 import newdeal from "../../assets/newdeal.png";
 import Lottie from "lottie-react";
+import { apiUrl } from "../../../config";
 
 const { Search } = Input;
+const API_URL = apiUrl;
+
 const Dashboard = () => {
   const [active, setActive] = useState(3);
+  const [categories, setCategories] = useState({ data: [] });
+  console.log(categories);
   const [couponData, setCouponData] = useState();
-  console.log(couponData);
+
+  console.log('adasdasdasdadsa',couponData);
   useEffect(() => {
     const items = document.querySelectorAll(".slider .item");
     const next = document.getElementById("next");
@@ -93,7 +99,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://192.168.1.3:5000/api/product");
+        const response = await axiosInstance.get(`${API_URL}/api/product`);
         setCouponData(response?.data);
       } catch (error) {
         console.error(error);
@@ -134,6 +140,8 @@ const Dashboard = () => {
     },
   ];
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [bannerData, setBannerData] = useState({ data: [] });
+  console.log(bannerData);
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -143,16 +151,69 @@ const Dashboard = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-    const itemss = [
-      { image: dinner, title: "Buffets", offers: "Exclusive Buffet Offers", off: "50% OFF" },
-      { image: deal, title: "Restaurant Deals", offers: "Special Restaurant Discounts", off: "50% OFF" },
-      { image: spa, title: "Spa Deals", offers: "Relaxation Offers & Packages", off: "50% OFF" },
-      { image: salon, title: "Salon Deals", offers: "Salon Service Discounts", off: "50% OFF" },
-      { image: game, title: "Games & Outing", offers: "Entertainment Offers & Deals", off: "50% OFF" },
-      { image: gift, title: "Gifts Cards", offers: "Gift Card Discounts", off: "50% OFF" },
-      { image: online, title: "Online Shopping", offers: "Online Shopping Offers", off: "50% OFF" },
-      { image: newdeal, title: "New Deals", offers: "Latest Deals & Offers", off: "50% OFF" }
+  const itemss = [
+    {
+      image: dinner,
+      title: "Buffets",
+      offers: "Exclusive Buffet Offers",
+      off: "50% OFF",
+    },
+    {
+      image: deal,
+      title: "Restaurant Deals",
+      offers: "Special Restaurant Discounts",
+      off: "50% OFF",
+    },
+    {
+      image: spa,
+      title: "Spa Deals",
+      offers: "Relaxation Offers & Packages",
+      off: "50% OFF",
+    },
+    {
+      image: salon,
+      title: "Salon Deals",
+      offers: "Salon Service Discounts",
+      off: "50% OFF",
+    },
+    {
+      image: game,
+      title: "Games & Outing",
+      offers: "Entertainment Offers & Deals",
+      off: "50% OFF",
+    },
+    {
+      image: gift,
+      title: "Gifts Cards",
+      offers: "Gift Card Discounts",
+      off: "50% OFF",
+    },
+    {
+      image: online,
+      title: "Online Shopping",
+      offers: "Online Shopping Offers",
+      off: "50% OFF",
+    },
+    {
+      image: newdeal,
+      title: "New Deals",
+      offers: "Latest Deals & Offers",
+      off: "50% OFF",
+    },
   ];
+  useEffect(() => {
+    const getCategory = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `${API_URL}/api/category/getAllCategory`
+        );
+        setCategories(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getCategory();
+  }, []);
   const onClick = ({ key }) => {
     message.info(`Click on item ${key}`);
   };
@@ -169,8 +230,21 @@ const Dashboard = () => {
       label: "Landing Page 2",
       key: "3",
     },
-  
   ];
+  useEffect(() => {
+    try {
+      axiosInstance
+        .get(`${API_URL}/api/banner/getAllBanners`)
+        .then((response) => {
+          setBannerData(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
   return (
     <div className="m-4">
       <div
@@ -189,7 +263,6 @@ const Dashboard = () => {
               >
                 <a onClick={(e) => e.preventDefault()}>
                   <Space>
-  
                     <DownOutlined />
                   </Space>
                 </a>
@@ -233,15 +306,11 @@ const Dashboard = () => {
             className="mySwiper m-4"
             style={{ width: "100%" }}
           >
-            <SwiperSlide>Slide 1</SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-            <SwiperSlide>Slide 3</SwiperSlide>
-            <SwiperSlide>Slide 4</SwiperSlide>
-            <SwiperSlide>Slide 5</SwiperSlide>
-            <SwiperSlide>Slide 6</SwiperSlide>
-            <SwiperSlide>Slide 7</SwiperSlide>
-            <SwiperSlide>Slide 8</SwiperSlide>
-            <SwiperSlide>Slide 9</SwiperSlide>
+            {bannerData.data.map((item, index) => (
+              <SwiperSlide key={index}>
+                <img src={item.images} width="100%" height="100%" />
+              </SwiperSlide>
+            ))}
           </Swiper>
           <div
             className="rounded-[60px] border p-8 bg-[#f8f1e1]"
@@ -275,12 +344,15 @@ const Dashboard = () => {
           <p className="font-bold text-[35px]">Business Categories</p>
         </div>
         <div className="grid grid-cols-6 gap-4 m-[4rem] xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 ">
-          {itemss.map((item, index) => (
+          {categories?.data.map((item, index) => (
             <Link to={`/category`} state={{ item }}>
-              <div className="border flex justify-center items-center flex-col bg-white rounded-[20px] w-[200px] p-4 shadow-xl hover:shadow-2xl">
-                <img src={item.image} width={60} height={60} />
+              <div
+                key={index}
+                className="border flex justify-center items-center flex-col bg-white rounded-[20px] w-[100%] p-4 shadow-xl hover:shadow-2xl"
+              >
+                <img src={item.images} style={{width:"100%", height:'200px'}} />
                 <p className="text-[20px] font-semibold my-2 mt-4">
-                  {item.title}
+                  {item.name}
                 </p>
               </div>
             </Link>
@@ -308,17 +380,24 @@ const Dashboard = () => {
                   >
                     Avail Now
                   </Button>
-                  <Modal  open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer>
-          <div className="flex justify-center items-center flex-col gap-4"> 
-          <p className="text-center font-bold text-[20px]">Download Mobile App</p>
-        <img src={logo} width={150} height={60} />
+                  <Modal
+                    open={isModalOpen}
+                    onOk={handleOk}
+                    onCancel={handleCancel}
+                    footer
+                  >
+                    <div className="flex justify-center items-center flex-col gap-4">
+                      <p className="text-center font-bold text-[20px]">
+                        Download Mobile App
+                      </p>
+                      <img src={logo} width={150} height={60} />
+                    </div>
 
-          </div>
-        
-        <Lottie animationData={animation2} loop={true} />
-        <p className="text-center font-bold text-[20px]">To Get Your Coupon</p>
-
-      </Modal>
+                    <Lottie animationData={animation2} loop={true} />
+                    <p className="text-center font-bold text-[20px]">
+                      To Get Your Coupon
+                    </p>
+                  </Modal>
                 </div>
               </div>
             </div>
@@ -341,7 +420,7 @@ const Dashboard = () => {
           {restaurants.map((restaurant, index) => (
             <div class="" key={index}>
               <div className="bg-[white] p-[1rem] rounded-[20px]">
-                <Image
+                <img
                   src={example}
                   width="100%"
                   height="200px"
@@ -372,3 +451,9 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+
+
+
+
