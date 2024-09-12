@@ -1,8 +1,10 @@
 import { Button, Form, Input, message } from "antd";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
+import { apiUrl } from "../../../../config";
+import axiosInstance from '../../../../axiosInstance'
 
+const API_URL = apiUrl;
 
 const Home = () => {
   const [email, setEmail] = useState("");
@@ -28,15 +30,17 @@ const Home = () => {
   }, []);
 
   const onFinish = (values) => {
-    axios
-      .post("http://192.168.1.3:5000/api/auth/login", { 
+    axiosInstance
+      .post(`${API_URL}/api/auth/login`, { 
         name: values.name,
         email: values.email,
         password: values.password,
       })
       .then((response) => {
+        console.log("ddasdjkadajkdajdbajksd",response?.data?.accessToken)
+        localStorage.setItem("accessToken",response?.data?.accessToken)
         message.success("Login successful!");
-        navigate('/Dashboard')
+        navigate('/')
       })
       .catch((error) => {
         message.error("Login failed!");
@@ -49,8 +53,8 @@ const Home = () => {
     setIsLogin(true);
   };
   const onFinish2 = (values) => {
-    axios
-      .post("http://192.168.1.3:5000/api/auth/register", {
+    axiosInstance
+      .post(`${API_URL}/api/auth/register`, {
         name: values.name,
         email: values.email,
         password: values.password,
