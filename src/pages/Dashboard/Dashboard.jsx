@@ -29,6 +29,7 @@ import newdeal from "../../assets/newdeal.png";
 import Lottie from "lottie-react";
 import { apiUrl } from "../../../config";
 
+const { Search } = Input;
 const API_URL = apiUrl;
 
 const Dashboard = () => {
