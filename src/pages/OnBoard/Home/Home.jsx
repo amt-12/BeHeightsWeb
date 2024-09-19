@@ -31,17 +31,11 @@ const Home = () => {
 
   const onFinish = (values) => {
     axiosInstance
-      .post(`${API_URL}/api/auth/login`, 
-      
-      { 
-        name: values.name,
+      .post(`${API_URL}/api/auth/login`, { 
+       
         email: values.email,
         password: values.password,
-      }
-      
-      
-      
-      )
+      })
       .then((response) => {
         localStorage.setItem("accessToken",response?.data?.accessToken)
         message.success(response?.data?.message);
