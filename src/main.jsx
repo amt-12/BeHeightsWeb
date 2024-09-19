@@ -6,20 +6,15 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from './error-page';
-import Home from './pages/OnBoard/Home/Home.jsx'
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import Category from './pages/Category/Category.jsx';
 import LandingPage1 from './pages/LandingPage/LandingPage1.jsx';
 import LandingPage2 from './pages/LandingPage/LandingPage2.jsx';
 
 const router = createBrowserRouter([
+
   {
     path: "/",
-    element:<Home/>,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/dashboard",
     element:<Dashboard/>,
     errorElement: <ErrorPage />,
   },
