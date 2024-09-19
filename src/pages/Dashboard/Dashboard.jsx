@@ -1,5 +1,5 @@
 import { Button, Image } from "antd";
-import React, { useRef, useEffect, useState ,Platform} from "react";
+import React, { useRef, useEffect, useState, Platform } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import logo from "../../assets/logo.png";
 import {
@@ -38,55 +38,55 @@ const Dashboard = () => {
   console.log(categories);
   const [couponData, setCouponData] = useState();
 
-  console.log('adasdasdasdadsa',couponData);
-  useEffect(() => {
-    const items = document.querySelectorAll(".slider .item");
-    const next = document.getElementById("next");
-    const prev = document.getElementById("prev");
+  console.log("adasdasdasdadsa", couponData);
+  // useEffect(() => {
+  //   const items = document.querySelectorAll(".slider .item");
+  //   const next = document.getElementById("next");
+  //   const prev = document.getElementById("prev");
 
-    const loadShow = () => {
-      if (items && items.length > 0) {
-        items[active].style.transform = `none`;
-        items[active].style.zIndex = 1;
-        items[active].style.filter = "none";
-        items[active].style.opacity = 1;
+  //   const loadShow = () => {
+  //     if (items && items.length > 0) {
+  //       items[active].style.transform = `none`;
+  //       items[active].style.zIndex = 1;
+  //       items[active].style.filter = "none";
+  //       items[active].style.opacity = 1;
 
-        let stt = 0;
-        for (var i = active + 1; i < items.length; i++) {
-          stt++;
-          items[i].style.transform = `translateX(${120 * stt}px) scale(${
-            1 - 0.2 * stt
-          }) perspective(16px) rotateY(-1deg)`;
-          items[i].style.zIndex = -stt;
-          items[i].style.filter = "blur(5px)";
-          items[i].style.opacity = stt > 2 ? 0 : 0.6;
-        }
+  //       let stt = 0;
+  //       for (var i = active + 1; i < items.length; i++) {
+  //         stt++;
+  //         items[i].style.transform = `translateX(${120 * stt}px) scale(${
+  //           1 - 0.2 * stt
+  //         }) perspective(16px) rotateY(-1deg)`;
+  //         items[i].style.zIndex = -stt;
+  //         items[i].style.filter = "blur(5px)";
+  //         items[i].style.opacity = stt > 2 ? 0 : 0.6;
+  //       }
 
-        stt = 0;
-        for (var i = active - 1; i >= 0; i--) {
-          stt++;
-          items[i].style.transform = `translateX(${-120 * stt}px) scale(${
-            1 - 0.2 * stt
-          }) perspective(16px) rotateY(1deg)`;
-          items[i].style.zIndex = -stt;
-          items[i].style.filter = "blur(5px)";
-          items[i].style.opacity = stt > 2 ? 0 : 0.6;
-        }
-      }
-    };
+  //       stt = 0;
+  //       for (var i = active - 1; i >= 0; i--) {
+  //         stt++;
+  //         items[i].style.transform = `translateX(${-120 * stt}px) scale(${
+  //           1 - 0.2 * stt
+  //         }) perspective(16px) rotateY(1deg)`;
+  //         items[i].style.zIndex = -stt;
+  //         items[i].style.filter = "blur(5px)";
+  //         items[i].style.opacity = stt > 2 ? 0 : 0.6;
+  //       }
+  //     }
+  //   };
 
-    loadShow();
+  //   loadShow();
 
-    next.onclick = function () {
-      setActive(active + 1 < items.length ? active + 1 : active);
-      loadShow();
-    };
+  //   next.onclick = function () {
+  //     setActive(active + 1 < items.length ? active + 1 : active);
+  //     loadShow();
+  //   };
 
-    prev.onclick = function () {
-      setActive(active - 1 >= 0 ? active - 1 : active);
-      loadShow();
-    };
-  }, [active]);
+  //   prev.onclick = function () {
+  //     setActive(active - 1 >= 0 ? active - 1 : active);
+  //     loadShow();
+  //   };
+  // }, [active]);
   const onSearch = (value, _e, info) => console.log(info?.source, value);
   const coupons = [
     { code: "BB10", discount: "10% off", expiry: "2024-06-30" },
@@ -299,6 +299,7 @@ const Dashboard = () => {
             slidesPerView={1}
             spaceBetween={30}
             mousewheel={true}
+            autoplay={true}
             pagination={{
               clickable: true,
             }}
@@ -350,7 +351,10 @@ const Dashboard = () => {
                 key={index}
                 className="border flex justify-center items-center flex-col bg-white rounded-[20px] w-[100%] p-4 shadow-xl hover:shadow-2xl"
               >
-                <img src={item.images} style={{width:"100%", height:'200px'}} />
+                <img
+                  src={item.images}
+                  style={{ width: "100%", height: "200px" }}
+                />
                 <p className="text-[20px] font-semibold my-2 mt-4">
                   {item.name}
                 </p>
@@ -363,14 +367,25 @@ const Dashboard = () => {
         <div className="flex justify-center items-center">
           <p className="font-bold text-[35px]">Trending Coupons</p>
         </div>
-        <div class="slider">
-          {couponData?.products.map((coupon, index) => (
-            <div class="item" key={index}>
-              <div className="">
-                <Image src={example} width="100%" height="200px" />
+        <div className=" ">
+          <Swiper
+            direction={"horizontal"}
+            slidesPerView={1}
+            spaceBetween={30}
+            mousewheel={true}
+            pagination={{
+              clickable: true,
+            }}
+            autoplay={true}
+            modules={[Mousewheel, Pagination]}
+            className="mySwiper m-4"
+            style={{ width: "100%" }}
+          >
+            {couponData?.products.map((coupon, index) => (
+              <SwiperSlide key={index}>
                 <div className="py-[1rem] leading-8">
                   <p className="font-[500] text-[20px]">
-                    Name : {coupon?.resturantName}
+                    Name : {coupon?.restaurantName}
                   </p>
                   <p className="text-[20px]">{coupon?.offer}</p>
                   <p className="text-[18px] font-[500]">{coupon?.subOffer}</p>
@@ -392,24 +407,16 @@ const Dashboard = () => {
                       </p>
                       <img src={logo} width={150} height={60} />
                     </div>
-
                     <Lottie animationData={animation2} loop={true} />
                     <p className="text-center font-bold text-[20px]">
                       To Get Your Coupon
                     </p>
                   </Modal>
                 </div>
-              </div>
-            </div>
-          ))}
-
-          <Button id="prev">
-            <DoubleLeftOutlined className="text-[#f25827]" />
-          </Button>
-
-          <Button id="next">
-            <DoubleRightOutlined className="text-[#f25827]" />
-          </Button>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          
         </div>
       </div>
       <div className="flex-col justify-center items-center   rounded-[30px] m-[20px] my-[4rem]">
@@ -438,7 +445,7 @@ const Dashboard = () => {
                   </p>
                 </div>
 
-                <Button className="my-4 bg-[#f25827] text-white p-[1rem] rounded-[20px] font-[500] text-[end]">
+                <Button className="my-4 bg-[#f25827] text-white p-[1rem] rounded-[20px] font-[500] text-[end]" onClick={showModal}>
                   Order
                 </Button>
               </div>
@@ -451,9 +458,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-
-
-
-
-
