@@ -14,12 +14,12 @@ import LandingPage2 from './pages/LandingPage/LandingPage2.jsx';
 
 const router = createBrowserRouter([
   {
-    path: "/home",
+    path: "/",
     element:<Home/>,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/",
+    path: "/dashboard",
     element:<Dashboard/>,
     errorElement: <ErrorPage />,
   },

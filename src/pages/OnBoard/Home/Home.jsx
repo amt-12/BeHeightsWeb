@@ -45,7 +45,7 @@ const Home = () => {
       .then((response) => {
         localStorage.setItem("accessToken",response?.data?.accessToken)
         message.success(response?.data?.message);
-        navigate('/')
+        navigate('/dashboard')
       })
       .catch((error) => {
         message.error(error?.response?.data?.error?.message);
