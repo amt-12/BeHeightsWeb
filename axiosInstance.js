@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://192.168.1.2:5000",
+  baseURL: "https://api.beheights.com",
   timeout: 10000,
 });
 
@@ -10,8 +10,8 @@ const instance = axios.create({
 instance.interceptors.request.use(
   async (config) => {
     try {
-      
-      config.headers.Authorization = `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRtaW4iLCJfaWQiOiI2NmQ1YjMwYjFiMTU5MThiZDU3MzQwYzIiLCJwaG9uZSI6IjEyMzQ1Njc4OSIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzI2MTA5MTkzLCJleHAiOjE3MjYxMTI3OTN9.0oFunFo8QBoWowc7QWAAn4B08IEq5GLxPMn_4JuL-gQ"}`;
+      const accessToken = localStorage.getItem("accessToken")
+      config.headers.Authorization = `Bearer ${accessToken}`;
       return config;
     } catch (error) {
       console.error("Error setting Authorization header:", error);

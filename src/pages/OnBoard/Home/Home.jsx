@@ -31,20 +31,24 @@ const Home = () => {
 
   const onFinish = (values) => {
     axiosInstance
-      .post(`${API_URL}/api/auth/login`, { 
+      .post(`${API_URL}/api/auth/login`, 
+      
+      { 
         name: values.name,
         email: values.email,
         password: values.password,
-      })
+      }
+      
+      
+      
+      )
       .then((response) => {
-        console.log("ddasdjkadajkdajdbajksd",response?.data?.accessToken)
         localStorage.setItem("accessToken",response?.data?.accessToken)
-        message.success("Login successful!");
+        message.success(response?.data?.message);
         navigate('/')
       })
       .catch((error) => {
-        message.error("Login failed!");
-        console.error(error);
+        message.error(error?.response?.data?.error?.message);
       });
   };
   const handleRegisterButtonClick = () => {
@@ -66,8 +70,9 @@ const Home = () => {
         handleRegisterButtonClick();
       })
       .catch((error) => {
-        message.error("Registration failed!");
         console.error(error);
+
+        message.error("Registration failed!");
       });
   };
 
