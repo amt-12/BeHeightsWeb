@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import example from "../../assets/greenBack.jpg";
 import { Button, Image, Modal } from "antd";
@@ -23,7 +23,7 @@ const API_URL = apiUrl;
 const Category = () => {
   const location = useLocation();
   const item = location.state.item;
-  console.log(item?.subCategories)
+  console.log(item?.subCategories);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [categories, setCategories] = useState({ data: [] });
 
@@ -106,20 +106,24 @@ const Category = () => {
       </div>
       <div className="grid grid-cols-3 gap-4 m-[4rem] xs:grid-cols-1 lg:grid-cols-2 md:grid-cols-2 xl:grid-cols-3">
         {item?.subCategories.map((item, index) => (
-          <div key={index} style={{width:'100%'}} className=" flex  flex-col justify-center items-center gap-4 bg-white rounded-[20px]  p-3 shadow-xl hover:shadow-2xl">
+          <div
+            key={index}
+            style={{ width: "100%" }}
+            className=" flex  flex-col justify-center items-center gap-4 bg-white rounded-[20px]  p-3 shadow-xl hover:shadow-2xl"
+          >
             <div className="flex justify-between">
-            <div className="">
-              <p className="text-[15px] font-semibold my-2 mt-8">
-                {item}
-              </p>
-              <Button className="mt-4" onClick={showModal}>Avail Now</Button>
+              <div className="">
+                <p className="text-[15px] font-semibold my-2 mt-8">{item}</p>
+                <Button className="mt-4" onClick={showModal}>
+                  Avail Now
+                </Button>
+              </div>
+
+              <div className=" w-[160px]">
+                <Lottie animationData={animation} loop={true} />
+              </div>
             </div>
 
-            <div className=" w-[160px]">
-              <Lottie animationData={animation} loop={true} />
-            </div>
-            </div>
-            
             {/* <div className="flex justify-between  w-[100%]">
             <p className="text-[12px] font-[500]">Valid Till: 07 Jan 2025</p>
 
@@ -139,7 +143,10 @@ const Category = () => {
                 key={index}
                 className="border flex justify-center items-center flex-col bg-white rounded-[20px] w-[100%] p-4 shadow-xl hover:shadow-2xl"
               >
-                <img src={item.images} style={{width:"100%", height:'200px'}} />
+                <img
+                  src={item.images}
+                  style={{ width: "100%", height: "200px" }}
+                />
                 <p className="text-[20px] font-semibold my-2 mt-4">
                   {item.name}
                 </p>
@@ -147,17 +154,24 @@ const Category = () => {
             </Link>
           ))}
         </div>
-<Modal  open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer>
-          <div className="flex justify-center items-center flex-col gap-4"> 
-          <p className="text-center font-bold text-[20px]">Download Mobile App</p>
-        <img src={logo} width={150} height={60} />
-
+        <Modal
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer
+        >
+          <div className="flex justify-center items-center flex-col gap-4">
+            <p className="text-center font-bold text-[20px]">
+              Download Mobile App
+            </p>
+            <img src={logo} width={150} height={60} />
           </div>
-        
-        <Lottie animationData={animation2} loop={true} />
-        <p className="text-center font-bold text-[20px]">To Get Your Coupon</p>
 
-      </Modal>
+          <Lottie animationData={animation2} loop={true} />
+          <p className="text-center font-bold text-[20px]">
+            To Get Your Coupon
+          </p>
+        </Modal>
       </div>
     </>
   );

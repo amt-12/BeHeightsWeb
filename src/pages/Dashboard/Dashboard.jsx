@@ -29,73 +29,13 @@ import newdeal from "../../assets/newdeal.png";
 import Lottie from "lottie-react";
 import { apiUrl } from "../../../config";
 
-const { Search } = Input;
 const API_URL = apiUrl;
 
 const Dashboard = () => {
-  const [active, setActive] = useState(3);
   const [categories, setCategories] = useState({ data: [] });
   console.log(categories);
   const [couponData, setCouponData] = useState();
 
-  console.log("adasdasdasdadsa", couponData);
-  // useEffect(() => {
-  //   const items = document.querySelectorAll(".slider .item");
-  //   const next = document.getElementById("next");
-  //   const prev = document.getElementById("prev");
-
-  //   const loadShow = () => {
-  //     if (items && items.length > 0) {
-  //       items[active].style.transform = `none`;
-  //       items[active].style.zIndex = 1;
-  //       items[active].style.filter = "none";
-  //       items[active].style.opacity = 1;
-
-  //       let stt = 0;
-  //       for (var i = active + 1; i < items.length; i++) {
-  //         stt++;
-  //         items[i].style.transform = `translateX(${120 * stt}px) scale(${
-  //           1 - 0.2 * stt
-  //         }) perspective(16px) rotateY(-1deg)`;
-  //         items[i].style.zIndex = -stt;
-  //         items[i].style.filter = "blur(5px)";
-  //         items[i].style.opacity = stt > 2 ? 0 : 0.6;
-  //       }
-
-  //       stt = 0;
-  //       for (var i = active - 1; i >= 0; i--) {
-  //         stt++;
-  //         items[i].style.transform = `translateX(${-120 * stt}px) scale(${
-  //           1 - 0.2 * stt
-  //         }) perspective(16px) rotateY(1deg)`;
-  //         items[i].style.zIndex = -stt;
-  //         items[i].style.filter = "blur(5px)";
-  //         items[i].style.opacity = stt > 2 ? 0 : 0.6;
-  //       }
-  //     }
-  //   };
-
-  //   loadShow();
-
-  //   next.onclick = function () {
-  //     setActive(active + 1 < items.length ? active + 1 : active);
-  //     loadShow();
-  //   };
-
-  //   prev.onclick = function () {
-  //     setActive(active - 1 >= 0 ? active - 1 : active);
-  //     loadShow();
-  //   };
-  // }, [active]);
-  const onSearch = (value, _e, info) => console.log(info?.source, value);
-  const coupons = [
-    { code: "BB10", discount: "10% off", expiry: "2024-06-30" },
-    { code: "BB20", discount: "20% off", expiry: "2024-07-15" },
-    { code: "BB30", discount: "30% off", expiry: "2024-08-01" },
-    { code: "BB40", discount: "40% off", expiry: "2024-09-10" },
-    { code: "BB50", discount: "50% off", expiry: "2024-10-25" },
-    { code: "BB60", discount: "60% off", expiry: "2024-11-30" },
-  ];
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -107,41 +47,11 @@ const Dashboard = () => {
     };
     fetchData();
   }, []);
-  const restaurants = [
-    {
-      restaurantName: "The Gourmet Bistro",
-      subHeading: "Fine Dining",
-      contactNumber: "123-456-7890",
-    },
-    {
-      restaurantName: "Pasta Paradise",
-      subHeading: "Italian Cuisine",
-      contactNumber: "234-567-8901",
-    },
-    {
-      restaurantName: "Sushi Haven",
-      subHeading: "Japanese Sushi",
-      contactNumber: "345-678-9012",
-    },
-    {
-      restaurantName: "Grill Masters",
-      subHeading: "Barbecue",
-      contactNumber: "456-789-0123",
-    },
-    {
-      restaurantName: "Burger Bliss",
-      subHeading: "Gourmet Burgers",
-      contactNumber: "567-890-1234",
-    },
-    {
-      restaurantName: "Vegan Delights",
-      subHeading: "Plant-Based Options",
-      contactNumber: "678-901-2345",
-    },
-  ];
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [bannerData, setBannerData] = useState({ data: [] });
-  console.log(bannerData);
+  const [businessData, setBusinessData] = useState();
+  console.log("yeh ha vo", businessData);
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -151,56 +61,7 @@ const Dashboard = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const itemss = [
-    {
-      image: dinner,
-      title: "Buffets",
-      offers: "Exclusive Buffet Offers",
-      off: "50% OFF",
-    },
-    {
-      image: deal,
-      title: "Restaurant Deals",
-      offers: "Special Restaurant Discounts",
-      off: "50% OFF",
-    },
-    {
-      image: spa,
-      title: "Spa Deals",
-      offers: "Relaxation Offers & Packages",
-      off: "50% OFF",
-    },
-    {
-      image: salon,
-      title: "Salon Deals",
-      offers: "Salon Service Discounts",
-      off: "50% OFF",
-    },
-    {
-      image: game,
-      title: "Games & Outing",
-      offers: "Entertainment Offers & Deals",
-      off: "50% OFF",
-    },
-    {
-      image: gift,
-      title: "Gifts Cards",
-      offers: "Gift Card Discounts",
-      off: "50% OFF",
-    },
-    {
-      image: online,
-      title: "Online Shopping",
-      offers: "Online Shopping Offers",
-      off: "50% OFF",
-    },
-    {
-      image: newdeal,
-      title: "New Deals",
-      offers: "Latest Deals & Offers",
-      off: "50% OFF",
-    },
-  ];
+
   useEffect(() => {
     const getCategory = async () => {
       try {
@@ -245,6 +106,37 @@ const Dashboard = () => {
       console.error(error);
     }
   }, []);
+  useEffect(() => {
+    try {
+      const statusCurrent = "active";
+      axiosInstance
+        .get(`${API_URL}/api/addBusiness/get?status=${statusCurrent}`)
+        .then((response) => {
+          console.log("yehi hi dekhna na ha", response);
+          setBusinessData(response?.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+  const images = [
+    "https://files.123freevectors.com/wp-content/original/202640-plain-light-color-background.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBnFOeUqNdWm_niRYu5d_z2Kmz5kOG0OUxR1D5QfDsKsEWAdamIqQ0z65kdsbFo0FpU3I&usqp=CAU",
+    "https://files.123freevectors.com/wp-content/original/202640-plain-light-color-background.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFCljp7f6E4S8rAfJlLn6lR6pKVyUlSVRTmevoelVN8u2sDg6Eg-Zm8YRxspYKvhgbS2c&usqp=CAU",
+    "https://files.123freevectors.com/wp-content/original/202640-plain-light-color-background.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYTli-0R3gy5_Eg3l-0-YcTEPZLd_gJg1aEsUOA8Ts_QbpICKh8NW9NFmCjLQCrxMw5QI&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYTli-0R3gy5_Eg3l-0-YcTEPZLd_gJg1aEsUOA8Ts_QbpICKh8NW9NFmCjLQCrxMw5QI&usqp=CAU",
+  ];
+
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images[randomIndex];
+  };
+
   return (
     <div className="m-4">
       <div
@@ -268,7 +160,7 @@ const Dashboard = () => {
                 </a>
               </Dropdown>
             </div>
-            <div className="flex items-center justify-center gap-2 xs:hidden">
+            <div className="flex items-center justify-center gap-2  xs:hidden sm:flex md:flex lg:flex xl:flex">
               <Link to={`/LandingPage1`}>
                 <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
                   LandingPage1
@@ -281,16 +173,14 @@ const Dashboard = () => {
                 </Button>
               </Link>
               {/* <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
-                ABOUT
-              </Button>
-              <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
-                SUPPORT
-              </Button> */}
+    ABOUT
+  </Button>
+  <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
+    SUPPORT
+  </Button> */}
             </div>
 
-            <p className="text-white">
-              <BellFilled className="text-[25px] text-black" />
-            </p>
+            
           </div>
         </div>
         <div className=" ">
@@ -313,7 +203,7 @@ const Dashboard = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <div
+          {/* <div
             className="rounded-[60px] border p-8 bg-[#f8f1e1]"
             style={{ width: "100%", height: "100%" }}
           >
@@ -337,7 +227,7 @@ const Dashboard = () => {
                 <RightCircleFilled className="text-[#f25827] text-[20px]" />
               </Button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex-col justify-center items-center  rounded-[30px] m-[20px] my-[4rem]">
@@ -367,23 +257,23 @@ const Dashboard = () => {
         <div className="flex justify-center items-center">
           <p className="font-bold text-[35px]">Trending Coupons</p>
         </div>
-        <div className=" ">
-          <Swiper
-            direction={"horizontal"}
-            slidesPerView={1}
-            spaceBetween={30}
-            mousewheel={true}
-            pagination={{
-              clickable: true,
-            }}
-            autoplay={true}
-            modules={[Mousewheel, Pagination]}
-            className="mySwiper m-4"
-            style={{ width: "100%" }}
-          >
-            {couponData?.products.map((coupon, index) => (
-              <SwiperSlide key={index}>
-                <div className="py-[1rem] leading-8">
+        <div className="grid grid-cols-6 gap-4 m-[4rem] xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 ">
+          {couponData?.products.map((coupon, index) => (
+            <div
+              key={index}
+              style={{
+                display: "flex",
+                backgroundImage: `url(${getRandomImage()})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+
+                justifyContent: "center",
+                borderRadius: "20px",
+              }}
+              className="border flex justify-center items-center flex-col bg-white rounded-[20px] w-[100%] p-4 shadow-xl hover:shadow-2xl"
+            >
+              <div className="">
+                <div>
                   <p className="font-[500] text-[20px]">
                     Name : {coupon?.restaurantName}
                   </p>
@@ -413,39 +303,65 @@ const Dashboard = () => {
                     </p>
                   </Modal>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          
+              </div>
+            </div>
+          ))}
         </div>
       </div>
       <div className="flex-col justify-center items-center   rounded-[30px] m-[20px] my-[4rem]">
         <div className="flex justify-center items-center">
           <p className="font-bold text-[35px]">Recommended</p>
         </div>
-        <div className="grid grid-cols-3 xs:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-[2rem] px-10 ">
-          {restaurants.map((restaurant, index) => (
+        <div className="grid grid-cols-3 xs:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-9 mt-[2rem] px-10 ">
+          {businessData?.businesses?.map((item, index) => (
             <div class="" key={index}>
               <div className="bg-[white] p-[1rem] rounded-[20px]">
                 <img
-                  src={example}
+                  src={item?.image}
                   width="100%"
-                  height="200px"
+                  style={{ height: "300px" }}
                   className="rounded-[20px]"
                 />
                 <div className="py-[1rem] leading-8 px-4">
+                  <div className="flex justify-between items-center">
+                    <p className="font-[500] text-[20px]">
+                      {item?.businessName}
+                    </p>{" "}
+                    <p className="font-[500] text-[20px]">{item?.ownerName}</p>
+                  </div>
                   <p className="font-[500] text-[20px]">
-                    {restaurant?.restaurantName}
+                    {item?.businessDescription}
                   </p>
                   <p className="text-[20px] text-[gray]">
-                    {restaurant?.subHeading}
+                    {item?.businessEmail}
                   </p>
+                  <p className="text-[20px] text-[gray]">
+                    {item?.businessType}
+                  </p>{" "}
+                  <p className="text-[20px] text-[gray]">{item?.location}</p>
+                  <div className="flex justify-between items-center m">
+                    <div>
+                      <p className="text-[20px]">Opening Time</p>
+                      <p className="text-[20px] text-[gray]">
+                        {item?.openingTime}
+                      </p>
+                    </div>{" "}
+                    <div>
+                      <p className="text-[20px] ">Closing Time</p>
+                      <p className="text-[20px] text-[gray]">
+                        {item?.closingTime}
+                      </p>
+                    </div>
+                  </div>
                   <p className="text-[18px]  font-[500]">
-                    Contact: {restaurant?.contactNumber}
+                    Contact: {item?.phone}
                   </p>
                 </div>
 
-                <Button className="my-4 bg-[#f25827] text-white p-[1rem] rounded-[20px] font-[500] text-[end]" onClick={showModal}>
+                <Button
+                  className="my-4 bg-[#f25827] text-white p-[1rem] rounded-[20px] font-[500] text-[end]"
+                  onClick={showModal}
+                >
                   Order
                 </Button>
               </div>
