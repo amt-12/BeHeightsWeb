@@ -136,6 +136,22 @@ const Dashboard = () => {
     const randomIndex = Math.floor(Math.random() * images.length);
     return images[randomIndex];
   };
+  const appUrl = "http://localhost:8081";
+  const storeUrl = "http://localhost:8081"; // or Google Play Store URL
+
+  const isAppInstalled = () => {
+    const anchor = document.createElement("a");
+    anchor.href = appUrl;
+    return anchor.click() && !anchor.href.includes("http");
+  };
+
+  const openApp = () => {
+    if (isAppInstalled()) {
+      window.location.href = appUrl;
+    } else {
+      window.location.href = storeUrl;
+    }
+  };
 
   return (
     <div className="m-4">
@@ -179,8 +195,6 @@ const Dashboard = () => {
     SUPPORT
   </Button> */}
             </div>
-
-            
           </div>
         </div>
         <div className=" ">
@@ -233,6 +247,9 @@ const Dashboard = () => {
       <div className="flex-col justify-center items-center  rounded-[30px] m-[20px] my-[4rem]">
         <div className="flex justify-center items-center">
           <p className="font-bold text-[35px]">Business Categories</p>
+          {/* <a href="#" onClick={openApp}>
+            Open App
+          </a>{" "} */}
         </div>
         <div className="grid grid-cols-6 gap-4 m-[4rem] xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 ">
           {categories?.data.map((item, index) => (

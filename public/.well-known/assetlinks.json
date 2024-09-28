@@ -1,0 +1,9 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.amt22.coffeecompany",
+      "sha256_cert_fingerprints":
+      ["6:3E:E0:D4:D0:A4:F5:C5:F5:59:B3:D6:44:E4:A1:30:1D:F2:ED:61:CE:A6:BE:90:C2:64:29:15:BE:0C:71:CB"]
+    }
+  }]
