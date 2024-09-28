@@ -137,7 +137,7 @@ const Dashboard = () => {
     return images[randomIndex];
   };
   const appUrl = "https://www.beheights.com/app/";
-  const storeUrl = "https://www.beheights.com/app/"; // or Google Play Store URL
+  const storeUrl = "http://192.168.1.2:8081"; // or Google Play Store URL
 
   const isAppInstalled = () => {
     const anchor = document.createElement("a");
