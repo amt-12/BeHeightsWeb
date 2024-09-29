@@ -262,7 +262,7 @@ const Dashboard = () => {
             <Link to={`/category`} state={{ item }}>
               <div
                 key={index}
-                className="border flex justify-center items-center flex-col bg-white rounded-[20px] md:w-[300px]  xxxs:w-[270px]  p-4 shadow-xl hover:shadow-2xl"
+                className="border flex justify-center items-center flex-col bg-white rounded-[20px] md:w-[300px]  xxxs:w-[260px] xs:w-[200px] sm:w-[280px]  p-4 shadow-xl hover:shadow-2xl"
               >
                 <img
                   src={item.images}
@@ -335,7 +335,7 @@ const Dashboard = () => {
           ))}
         </div>
       </div>
-      <div className="flex-col justify-center items-center   rounded-[30px]  my-[4rem]">
+      <div className="flex-col justify-center items-center  rounded-[30px]  my-[4rem]">
         <div className="flex justify-center items-center">
           <p className="font-bold text-[35px] xxxs:text-[25px]">Recommended</p>
         </div>

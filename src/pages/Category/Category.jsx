@@ -145,7 +145,7 @@ const Category = () => {
             <Link to={`/category`} state={{ item }}>
               <div
                 key={index}
-                className="border flex justify-center items-center flex-col bg-white rounded-[20px] md:w-[300px]  xxxs:w-[280px] xxxs:m-[10px] p-4 shadow-xl hover:shadow-2xl"
+                className="border flex justify-center items-center flex-col bg-white rounded-[20px] md:w-[300px]  xxxs:w-[260px] xs:w-[200px] sm:w-[280px]  p-4 shadow-xl hover:shadow-2xl"
               >
                 <img
                   src={item.images}
