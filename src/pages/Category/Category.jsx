@@ -104,16 +104,16 @@ const Category = () => {
       <div className="flex justify-center items-center border shadow-xl hover:shadow-2xl m-4 p-2 bg-[#f25827] rounded-md">
         <p className="font-[500] text-[20px]">{item.name} Sub-Categories</p>
       </div>
-      <div className="grid grid-cols-3 gap-4 m-[4rem] xs:grid-cols-1 lg:grid-cols-2 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid grid-cols-3 gap-4 m-[1rem] xxxs:grid-cols-1  xs:grid-cols-3 md:grid-cols-4 xl:grid-cols-3 lg:grid-cols-4">
         {item?.subCategories.map((item, index) => (
           <div
             key={index}
             style={{ width: "100%" }}
-            className=" flex  flex-col justify-center items-center gap-4 bg-white rounded-[20px]  p-3 shadow-xl hover:shadow-2xl"
+            className="flex flex-col justify-center items-center gap-4 bg-white rounded-[20px]  p-3 shadow-xl hover:shadow-2xl "
           >
-            <div className="flex justify-between">
+            <div className="flex justify-between mt-8 xs:flex-col xs:justify-center xs:items-center xl:flex-row">
               <div className="">
-                <p className="text-[15px] font-semibold my-2 mt-8">{item}</p>
+                <p className="text-[15px] font-semibold my-2 text-center">{item}</p>
                 <Button className="mt-4" onClick={showModal}>
                   Avail Now
                 </Button>
@@ -132,20 +132,25 @@ const Category = () => {
           </div>
         ))}
       </div>
-      <div className="flex-col justify-center items-center  rounded-[30px] m-[20px] my-[4rem]">
-        <div className="flex justify-center items-center">
-          <p className="font-bold text-[35px]">Business Categories</p>
+      <div className="flex-col justify-center items-center  rounded-[30px]  my-[4rem]">
+        <div className="flex justify-center items-center my-8">
+          <p className="font-bold text-[35px] xxxs:text-[25px] ">Business Categories</p>
+          {/* <a href="#" onClick={openApp}>
+            Open App
+          </a>{" "} */}
         </div>
-        <div className="grid grid-cols-6 gap-4 m-[4rem] xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 ">
+        <div className="grid grid-cols-6 gap-4 sm:grid-cols-2 xxxs:m-2 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 xxxs:grid-cols-1 xs:grid-cols-2">
+        {/* <div className=""> */}
           {categories?.data.map((item, index) => (
             <Link to={`/category`} state={{ item }}>
               <div
                 key={index}
-                className="border flex justify-center items-center flex-col bg-white rounded-[20px] w-[100%] p-4 shadow-xl hover:shadow-2xl"
+                className="border flex justify-center items-center flex-col bg-white rounded-[20px] md:w-[300px]  xxxs:w-[280px] xxxs:m-[10px] p-4 shadow-xl hover:shadow-2xl"
               >
                 <img
                   src={item.images}
-                  style={{ width: "100%", height: "200px" }}
+                  objectFit="contain"
+                  style={{ width: "100%", height: "100%", padding:20}}
                 />
                 <p className="text-[20px] font-semibold my-2 mt-4">
                   {item.name}
@@ -154,24 +159,6 @@ const Category = () => {
             </Link>
           ))}
         </div>
-        <Modal
-          open={isModalOpen}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          footer
-        >
-          <div className="flex justify-center items-center flex-col gap-4">
-            <p className="text-center font-bold text-[20px]">
-              Download Mobile App
-            </p>
-            <img src={logo} width={150} height={60} />
-          </div>
-
-          <Lottie animationData={animation2} loop={true} />
-          <p className="text-center font-bold text-[20px]">
-            To Get Your Coupon
-          </p>
-        </Modal>
       </div>
     </>
   );

@@ -176,7 +176,7 @@ const Dashboard = () => {
                 </a>
               </Dropdown>
             </div>
-            <div className="flex items-center justify-center gap-2  xs:hidden sm:flex md:flex lg:flex xl:flex">
+            <div className="flex items-center justify-center gap-2  xxxs:hidden sm:flex md:flex lg:flex xl:flex">
               <Link to={`/LandingPage1`}>
                 <Button className="bg-[#f25827] text-[white] font-medium rounded-[20px]">
                   LandingPage1
@@ -213,7 +213,12 @@ const Dashboard = () => {
           >
             {bannerData.data.map((item, index) => (
               <SwiperSlide key={index}>
-                <img src={item.images} width="100%" height="100%" />
+                <img
+                  src={item.images}
+                  width="100%"
+                  height="100%"
+                  objectFit="contain"
+                />{" "}
               </SwiperSlide>
             ))}
           </Swiper>
@@ -244,23 +249,25 @@ const Dashboard = () => {
           </div> */}
         </div>
       </div>
-      <div className="flex-col justify-center items-center  rounded-[30px] m-[20px] my-[4rem]">
-        <div className="flex justify-center items-center">
-          <p className="font-bold text-[35px]">Business Categories</p>
+      <div className="flex-col justify-center items-center  rounded-[30px]  my-[4rem]">
+        <div className="flex justify-center items-center my-8">
+          <p className="font-bold text-[35px] xxxs:text-[25px] ">Business Categories</p>
           {/* <a href="#" onClick={openApp}>
             Open App
           </a>{" "} */}
         </div>
-        <div className="grid grid-cols-6 gap-4 m-[4rem] xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 ">
+        <div className="grid grid-cols-6 gap-4 sm:grid-cols-2 xxxs:m-2 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 xxxs:grid-cols-1 xs:grid-cols-2">
+        {/* <div className=""> */}
           {categories?.data.map((item, index) => (
             <Link to={`/category`} state={{ item }}>
               <div
                 key={index}
-                className="border flex justify-center items-center flex-col bg-white rounded-[20px] w-[100%] p-4 shadow-xl hover:shadow-2xl"
+                className="border flex justify-center items-center flex-col bg-white rounded-[20px] md:w-[300px]  xxxs:w-[270px]  p-4 shadow-xl hover:shadow-2xl"
               >
                 <img
                   src={item.images}
-                  style={{ width: "100%", height: "200px" }}
+                  objectFit="contain"
+                  style={{ width: "100%", height: "100%", padding:20}}
                 />
                 <p className="text-[20px] font-semibold my-2 mt-4">
                   {item.name}
@@ -270,11 +277,11 @@ const Dashboard = () => {
           ))}
         </div>
       </div>
-      <div className="flex-col justify-center items-center  rounded-[30px] m-[40px] my-[4rem]">
-        <div className="flex justify-center items-center">
-          <p className="font-bold text-[35px]">Trending Coupons</p>
+      <div className="flex-col justify-center items-center  rounded-[30px]  my-[4rem]">
+        <div className="flex justify-center items-center my-8">
+          <p className="font-bold text-[35px] xxxs:text-[24px]">Trending Coupons</p>
         </div>
-        <div className="grid grid-cols-6 gap-4 m-[4rem] xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 ">
+        <div className="grid grid-cols-6 gap-4 sm:grid-cols-2 m-[4rem] xxxs:m-2 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 xxxs:grid-cols-1 xs:grid-cols-1 ">
           {couponData?.products.map((coupon, index) => (
             <div
               key={index}
@@ -296,12 +303,15 @@ const Dashboard = () => {
                   </p>
                   <p className="text-[20px]">{coupon?.offer}</p>
                   <p className="text-[18px] font-[500]">{coupon?.subOffer}</p>
+                  <div className="flex justify-center"> 
                   <Button
                     className="my-4 bg-[#f25827] text-white p-[1rem] rounded-[20px] font-[500]"
                     onClick={showModal}
                   >
                     Avail Now
                   </Button>
+                  </div>
+                  
                   <Modal
                     open={isModalOpen}
                     onOk={handleOk}
@@ -325,11 +335,11 @@ const Dashboard = () => {
           ))}
         </div>
       </div>
-      <div className="flex-col justify-center items-center   rounded-[30px] m-[20px] my-[4rem]">
+      <div className="flex-col justify-center items-center   rounded-[30px]  my-[4rem]">
         <div className="flex justify-center items-center">
-          <p className="font-bold text-[35px]">Recommended</p>
+          <p className="font-bold text-[35px] xxxs:text-[25px]">Recommended</p>
         </div>
-        <div className="grid grid-cols-3 xs:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-9 mt-[2rem] px-10 ">
+        <div className="grid grid-cols-3 sm:grid-cols-2 xxxs:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-9 mt-[2rem] px-2 ">
           {businessData?.businesses?.map((item, index) => (
             <div class="" key={index}>
               <div className="bg-[white] p-[1rem] rounded-[20px]">
@@ -339,13 +349,14 @@ const Dashboard = () => {
                   style={{ height: "300px" }}
                   className="rounded-[20px]"
                 />
-                <div className="py-[1rem] leading-8 px-4">
-                  <div className="flex justify-between items-center">
+                <div className="py-[1rem] leading-8 ">
+                  <div className="flex justify-between items-start mb-4  p-2">
                     <p className="font-[500] text-[20px]">
                       {item?.businessName}
-                    </p>{" "}
+                    </p>
                     <p className="font-[500] text-[20px]">{item?.ownerName}</p>
                   </div>
+                  <div className=" my-2">
                   <p className="font-[500] text-[20px]">
                     {item?.businessDescription}
                   </p>
@@ -354,17 +365,19 @@ const Dashboard = () => {
                   </p>
                   <p className="text-[20px] text-[gray]">
                     {item?.businessType}
-                  </p>{" "}
+                  </p>
                   <p className="text-[20px] text-[gray]">{item?.location}</p>
-                  <div className="flex justify-between items-center m">
+                  </div>
+           
+                  <div className="flex justify-between items-center my-4 ">
                     <div>
-                      <p className="text-[20px]">Opening Time</p>
-                      <p className="text-[20px] text-[gray]">
+                      <p className="text-[20px] font-[500]">Opening Time</p>
+                      <p className="text-[20px]  text-[gray]">
                         {item?.openingTime}
                       </p>
-                    </div>{" "}
+                    </div>
                     <div>
-                      <p className="text-[20px] ">Closing Time</p>
+                      <p className="text-[20px] font-[500] ">Closing Time</p>
                       <p className="text-[20px] text-[gray]">
                         {item?.closingTime}
                       </p>
@@ -374,13 +387,15 @@ const Dashboard = () => {
                     Contact: {item?.phone}
                   </p>
                 </div>
-
-                <Button
-                  className="my-4 bg-[#f25827] text-white p-[1rem] rounded-[20px] font-[500] text-[end]"
+<div className="flex justify-center items-center">
+<Button
+                  className="my-4 bg-[#f25827] text-white p-[1rem] rounded-[20px] font-[500] "
                   onClick={showModal}
                 >
                   Order
                 </Button>
+</div>
+                
               </div>
             </div>
           ))}
