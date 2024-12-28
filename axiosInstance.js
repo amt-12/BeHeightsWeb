@@ -2,8 +2,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://api.beheights.com",
-  timeout: 10000,
+  baseURL: "http://159.65.153.167",
+  timeout: 1000,
 });
 
 // Request interceptor
