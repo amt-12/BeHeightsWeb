@@ -1,2 +1,2 @@
 // config.js
-export const apiUrl = "https://api.beheights.com"
+export const apiUrl = "http://api.beheights.com"
