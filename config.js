@@ -1,2 +1,2 @@
 // config.js
-export const apiUrl = "http://159.65.153.167"
+export const apiUrl = "https://api.beheights.com"

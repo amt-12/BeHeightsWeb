@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://159.65.153.167",
+  baseURL: "https://api.beheights.com",
   timeout: 1000,
 });
 
